@@ -1,0 +1,25 @@
+
+<ion-view  style="background-color:#eee;" hide-nav-bar="true" ng-init="getReAssignedForms()">
+    		<ion-content direction="y" scrollbar-y="false" class="custom-subtabs">
+				<ion-list class="custom-content-reassign">
+				
+				   <ion-item ng-repeat="item in items"  class="formscontainer shadow">
+				  <img src="img/Form.png" class="container-image" />
+					<p class="form-lable">{{item.FormName}}</p>
+				<ion-option-button class="custom-button-history" ng-click="getReassignedRecords(item)">
+				 <b class="slide-text-history">History</b>
+				</ion-option-button>  
+							
+				 <ion-option-button class="custom-button-download" ng-click="downloadReassignForm(item)" ng-hide="hide_download">
+				 <b class="slide-text-download">Download</b>
+				 </ion-option-button> 
+						 <ion-option-button class="custom-button-info" ng-click="ReassignedFormInfo(item)">
+						 <b class="slide-text-info">Info</b>
+						 </ion-option-button>  
+				  </ion-item>
+				</ion-list>
+					<div ng-if="items !== undefined && !items.length" class="no-results">
+							  <p class="custom-noforms" style="margin-top: 56px;">No Formsz Available</p>
+							</div>
+					</ion-content>
+</ion-view>

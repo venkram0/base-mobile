@@ -1,0 +1,68 @@
+
+	<ion-header-bar class="bar-positive formdetails-header-bar" ng-init="getOfflineForms()">
+	<div class="custom_header_back" ng-click="back();" ng-show="forms_action_header"><img src="img/back.png" class="header-back" ></div>
+	<div class="custom_header_cancel" ng-click="clearSelection();"  ng-hide="forms_action_header"><img src="img/cancel.png" class="header-cancel" ></div>
+	<h3 class="header_formname">{{formname}}</h3>
+	
+	
+	<div  ng-show="forms_action_header">
+	<!-- <button class="button button-icon icon ion-ios-search-strong custom-search" ng-click="showFilterBar()" style="box-shadow: none;">
+    </button>  -->
+    <div class="ellipse_header_div">
+	<img src="img/ellipse.png" ng-hide="hide_ellipse" class="selectOptions" ng-click="openPopover();">
+	 </div>
+	</div>
+
+	<div style="margin-left: 10%;margin-top: 10px;" ng-hide="forms_action_header">
+	<img src="img/header_delete.png" class="header_delete" ng-hide="header_delete" ng-click="deleteAllRecord(selection,item);" ng-disabled="DeleteDisable"> 
+	<img src="img/Submit.png" class="heder_sync" ng-hide="heder_sync" ng-click="syncAllOfflineForm(selection);" >
+	</div>
+	</ion-header-bar>
+
+	
+<ion-view  style="background-color:#eee;" hide-nav-bar="true">
+  
+				<ion-content direction="y" scrollbar-y="false">
+				<ion-refresher pulling-icon="ion-arrow-down-b" on-refresh="refreshItems()">
+				</ion-refresher>
+				<ion-list class="custom-content">
+				
+			<!-- 	<ion-item ng-repeat="item in offlineitems" class="formscontainer shadow" ng-click="editOfflineForm(item)">
+				<div style="width:50%;height:50%;">
+				<input type="checkbox" ng-if="selectCheckBox" class="custom-selectBox"
+				ng-checked="selection.indexOf(item.recordId) > -1" ng-click="toggleSelection(item.recordId);$event.stopPropagation();"/>
+
+				<input type="checkbox" ng-if="selectAllCheckBox" ng-model="selectedAll" class="custom-selectBox" />
+				</div> 
+				<img src="img/Form.png" class="container-image" />
+				<p class="form-lable">{{item.recordId}}</p> -->
+				<ion-item ng-repeat="item in offlineitems" class="formscontainer shadow" >
+				<input type="checkbox" ng-if="selectCheckBox" class="custom-selectBox"
+				ng-checked="selection.indexOf(item.recordId) > -1" ng-click="toggleSelection(item.recordId);$event.stopPropagation();"/>
+				<input type="checkbox" ng-if="selectAllCheckBox" ng-model="selectedAll" class="custom-selectBox" /> 
+				<img src="img/Form.png" ng-click="editOfflineForm(item)" class="container-image" />
+				<p class="form-lable" style="width:50%;" ng-click="editOfflineForm(item)" >{{item.recordId}}</p>
+				
+				<ion-option-button class="custom-button-delete" ng-click="deleteRecord(item)" ng-hide="delete_hide">
+				 <b class="slide-text-download">Delete</b>
+				 </ion-option-button> 
+							 
+				<ion-option-button class="custom-button-sync"  ng-click="syncOfflineForm(item);" ng-hide="sync_hide">
+					 <b class="slide-text-download">Submit</b>	
+				 </ion-option-button>  
+				 
+				</ion-item> 
+				<!-- <div><img src="img/Fab.png" class="add-record" ng-click="getFormDetails(item)"></div> -->
+				</ion-list>
+					<div ng-if="offlineitems !== undefined && !offlineitems.length" class="no-results" style="padding-top: 155px;">
+							  <p class="custom-nohistory">No records yet! <br>
+							  <h3 class="custom-historytext"> Tap on <b style="color:Red">+</b> to create a record</h3></p>
+							</div>
+							
+					</ion-content>
+			<div class="fixed-outside" ng-show="addrecordiconForms">
+            <img src="img/Fab.png" class="button button-clear add-record " ng-click="getFormDetails(item)">
+            
+            </div>
+
+</ion-view> 

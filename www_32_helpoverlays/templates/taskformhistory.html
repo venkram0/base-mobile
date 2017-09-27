@@ -1,0 +1,71 @@
+
+	<ion-header-bar class="bar-custom formdetails-header-bar" ng-init="Tformhistory();">
+		<div class="custom_header_back" ng-click="backToTaskForms();">
+			<img src="img/back.png" class="header-back" ng-show="task_action_header">
+		</div>
+		<div class="custom_header_cancel" ng-click="clearSelection();"  ng-hide="task_action_header">
+			<img src="img/cancel.png" class="header-cancel" style="margin-left: -30px;">
+		</div>
+		<h3 class="header_formname" ng-show="task_action_header">{{taskname}}</h3>
+
+		<div style="margin-left: 150px;width: 40px;"  ng-click="openMap();" ng-show="headerMapOption">
+	        <img src="img/Map_View.png" class="switchtolist" >
+	    </div> 
+	</ion-header-bar>
+	
+	<ion-view hide-nav-bar="true">
+		<ion-content direction="y" scrollbar-y="false" style="top: 42px;">
+			<ion-refresher pulling-icon="ion-arrow-down-b" on-refresh="refreshOfflineRecords()">
+			</ion-refresher>
+			
+			<ion-list class="custom-content">
+				<div class="item item-divider" ng-show="!offlineTaskformhistory.length==0">Saved</div>
+				<ion-item ng-repeat="item in offlineTaskformhistory" class="formscontainer shadow" ng-click="editTaskForm(item)">
+			
+				<img src="img/Saved_record.png" class="container-image" ng-click="editTaskForm(item)" />
+				<p class="form-lable" style="width:50%;">{{item.recordId}}</p>
+
+				<!-- <ion-option-button class="custom-button-delete" ng-click="deleteRecord(item)" ng-hide="delete_hide">
+				 <b class="slide-text-download">Delete</b>
+				</ion-option-button> --> 
+						
+				
+				</ion-item>
+
+			</ion-list>
+			<!-- For prepop records -->
+			<ion-list class="custom-content">
+				<div class="item item-divider" ng-show="!prepopRecords.length==0">New</div>
+			   <ion-item ng-repeat="item in prepopRecords" class="formscontainer shadow" ng-click="getPrePoprecord(item)">
+			  	<img src="img/Form.png" class="container-image"/>
+			  	<p class="form-lable" style="width: 84%;">{{item.recordName1}}</p>
+				<small class="form-small" style="width: 84%;">{{item.recordName2}}</small>
+                <ion-option-button class="custom-button-navigate" ng-click="navigateToLocationFromPrepop(item.recordId)" ng-show="navigateOption">
+					 <b class="slide-text-download">Navigate</b>
+				</ion-option-button>
+			  </ion-item>
+			</ion-list>
+
+			<!-- For reassigned Records -->
+			<!-- ng-class="item.notifyStatus ? 'formscontainer' : 'formscontainer1 custom-margin'" -->
+			<ion-list class="custom-content">
+				<div class="item item-divider" ng-show="!reassignedDataVals.length==0" >Re-assign</div>
+			   <ion-item ng-repeat="item in reassignedDataVals" class="formscontainer shadow" ng-click="getPrePoprecord(item)" >
+			  	<img src="img/Re-assigned_Form.png" class="container-image"/>
+			  	<p class="form-lable" style="width: 84%;">{{item.recordName1}}</p>
+				<small class="form-small" style="width: 84%;">{{item.recordName2}}</small>
+                <ion-option-button class="custom-button-navigate" ng-click="navigateToLocationFromPrepop(item.recordId)" ng-show="navigateOption">
+					 <b class="slide-text-download">Navigate</b>
+				</ion-option-button>
+			  </ion-item>
+			</ion-list>
+
+			<div ng-if="prepopRecords !== undefined && !prepopRecords.length" class="no-results" style="padding-top: 155px;" ng-show="noTaskFormrecords">
+				<p class="custom-nohistory">No Tasks available <br>
+			</div>
+		</ion-content>
+
+        <button class="button button-fab button-fab-bottom-right button-dark"  ng-click="getTaskFormDetails()">
+ 		  <i class="icon ion-plus"></i>
+ 		</button>
+</ion-view> 

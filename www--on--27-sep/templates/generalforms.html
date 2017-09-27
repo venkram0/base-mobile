@@ -1,0 +1,31 @@
+
+<ion-view  style="background-color:#eee;" hide-nav-bar="true" ng-init="inProgressForms();">
+	 <ion-content direction="y" scrollbar-y="false" class="custom-subtabs">
+		<ion-refresher pulling-icon="ion-arrow-down-b" on-refresh="refreshItems()">
+		</ion-refresher>
+		<ion-list class="custom-content-reassign">
+
+			<ion-item ng-repeat="item in inProgressitems" class="formscontainer shadow" ng-click="switchMethod(item);">
+				<img src="img/Form.png" class="container-image" />
+				<p class="form-lable">{{item.FormName}}</p>
+				<ion-option-button class="custom-button-view" ng-click="getFormDetails(item)" ng-hide="view_hide">
+				<b class="slide-text-view">view</b> 
+				</ion-option-button>				
+				<ion-option-button class="custom-button-history" ng-click="inProgressRecords(item)">
+					<b class="slide-text-history">History</b>
+				</ion-option-button>  
+
+				<ion-option-button class="custom-button-info" ng-click="showRecordPopup(item)">
+					<b class="slide-text-info">Info</b>
+				</ion-option-button>   
+				<ion-option-button class="custom-button-delete" ng-click="deleteForm(item)">
+				<b class="slide-text-delete">Delete</b>
+				</ion-option-button> 
+			</ion-item>
+		</ion-list>
+		<div ng-if="inProgressitems !== undefined && !inProgressitems.length" class="no-results">
+			 <p class="custom-nohistory" style="margin-top: 56px;">No Downloads</p>
+		</div>
+		
+	</ion-content> 
+</ion-view> 

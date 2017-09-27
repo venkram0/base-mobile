@@ -1,0 +1,21 @@
+
+<ion-header-bar class="bar-custom formdetails-header-bar">
+	<div class="custom_header_back" ng-click="back();">
+		<img src="img/back.png" class="header-back">
+		<h1 class="title tabs-title-lable" style="text-align: center;">{{taskname}}&nbsp;History</h1>
+	</div>
+</ion-header-bar>
+	
+<ion-view hide-nav-bar="true">
+	<ion-content direction="y" scrollbar-y="false">
+		<ion-list class="custom-content">
+			<ion-item ng-repeat="item in taskformOnlinehistoryObjects" class="formscontainer shadow" ng-click="ViewTaskFormRecord(item)">
+				<img src="img/Form.png" class="container-image" />
+				<p class="form-lable" style="width: 84%;">{{item.FormValues}}</p>
+			</ion-item> 
+		</ion-list>
+		<div ng-if="taskformOnlinehistoryObjects !== undefined && !taskformOnlinehistoryObjects.length" class="no-results">
+			<p class="custom-nohistory">No History Found</p>
+		</div>
+	</ion-content>
+</ion-view> 

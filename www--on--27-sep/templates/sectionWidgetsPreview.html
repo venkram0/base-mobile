@@ -1,0 +1,144 @@
+<div ng-switch on="field.data.type.view">
+<div class="skeleton-content" ng-class="{ 'Lastdiv' : $index + 1 == fields.length, 'FirstDiv' : $index ==0 }">
+
+ <div ng-switch-when="textbox" ng-class="{ 'Lastdiv' : $index + 1 == fields.length , 'FirstDiv' : $index ==0 }">
+  <ion-item class="content-username">
+ <label class="item item-input item-stacked-label content-text" style="font-weight: bold;"><p ng-show='{{field.data.required}}' class="mandatory-field">*</p>
+    <div class="input-label">{{ field.data.lable }}</div>
+   <input type="text" ng-if="!isGridRecodsShow" placeholder ='{{field.data.placeHolder}}' ng-required='{{field.data.required}}' id={{field.data.id}} ng-model="recordInfo[field.data.id]">
+    
+	<input type="text" ng-if="isGridRecodsShow" placeholder ='{{field.data.placeHolder}}' ng-required='{{field.data.required}}' id={{field.data.id}} ng-model="selectedFormRecordFields[field.data.id]" ng-readonly="{{condition}}"> 
+  </label> 
+  </ion-item>
+  </div>	
+	
+	<!--[CASE-2] TEXTAREA -->
+		
+	<div ng-switch-when ="textarea" ng-class="{ 'Lastdiv' : $index + 1 == fields.length , 'FirstDiv' : $index ==0 }">
+ <label class="item item-input item-stacked-label" style="font-weight: bold;"><p ng-show='{{field.data.required}}' class="mandatory-field">*</p><div class="input-label">{{ field.data.lable }}</div></label> 
+<ion-item>
+ 
+ <textarea  ng-if="!isGridRecodsShow" placeholder='{{field.data.placeHolder}}' id={{field.data.id}} style="width: 101%;border-bottom: 1px solid;border-color: #ccc;" ng-model="recordInfo[field.data.id]"></textarea>
+  
+ <textarea  ng-if="isGridRecodsShow" id={{field.data.id}} style="width: 101%;border-bottom: 1px solid;border-color: #ccc;" ng-model="selectedFormRecordFields[field.data.id]" ng-readonly="{{condition}}" ></textarea>
+</ion-item>
+</div>
+	<!-- [CASE-3] CHECKBOX -->
+	
+	<div ng-switch-when ="checkbox" ng-class="{ 'Lastdiv' : $index + 1 == fields.length , 'FirstDiv' : $index ==0 }">
+ <div>
+ <label class="item item-input item-stacked-label" style="font-weight: bold;"><p ng-show='{{field.data.required}}' class="mandatory-field">*</p><div class="input-label">{{field.data.lable }}</div>
+ </label>
+ </div>
+ <ion-item  class="content-checkbox">
+	<ion-list>
+		<ion-item ng-repeat="item in field.data.type.values">
+		<ion-checkbox  ng-if="!isGridRecodsShow"  name={{field.data.id}} ng-model="ischekkk"  ng-change="toggleSelection(field.data.id,item.lable)">{{ item.lable }}
+		</ion-checkbox> 
+		 <div ng-if="isGridRecodsShow">
+			<ion-checkbox   ng-init="isCheked =  isContains(selectedFormRecordFields[field.data.id] , item.lable) " name={{field.data.id}} ng-model="isCheked" ng-change="toggleSelection(field.data.id,item.lable)"  ng-disabled="{{condition}}">{{ item.lable }}</ion-checkbox> 
+		 </div>
+		</ion-item>
+	</ion-list>
+</ion-item>	
+</div>
+
+	<!-- [CASE-4] RADIO BUTTON-->
+	<div ng-switch-when="radio" style="margin-left: 23px; padding-bottom: 18px;" ng-class="{ 'Lastdiv' : $index + 1 == fields.length , 'FirstDiv' : $index ==0 }">
+<label class="item item-input item-stacked-label" style="margin-left: -23px;font-weight: bold;"><p ng-show='{{field.data.required}}' class="mandatory-field">*</p><div class="input-label">{{ field.data.lable }}</div></label>
+<ion-list class="list">
+<ion-radio ng-if="!isGridRecodsShow" ng-repeat="item in field.data.type.values"  ng-init="recordInfo[field.data.id]=field.data.defaultValue" ng-value="item.value" style="right: 13px;width: 99%; border: 1px solid gainsboro;" ng-model="recordInfo[field.data.id]" name={{field.data.id}}>{{ item.lable }}</ion-radio> 
+
+ <ion-radio ng-if="isGridRecodsShow" ng-repeat="item in field.data.type.values" style="right: 13px;width: 99%; border: 1px solid gainsboro;" ng-model="selectedFormRecordFields[field.data.id]" ng-value="item.value" name={{field.data.id}} ng-disabled="{{condition}}">{{ item.lable }}</ion-radio>  
+</ion-list>
+</div>
+	<!-- [CASE-5] SELECT-->
+	<div class="list" ng-switch-when="select" ng-class="{ 'Lastdiv' : $index + 1 == fields.length , 'FirstDiv' : $index ==0 }">
+ <label class="item item-input item-select" style="margin-left: 6px;font-weight: bold;"><p ng-show='{{field.data.required}}' class="mandatory-field">*</p>
+    <div class="input-label  custom-divider" style="margin-left: 6px;padding-bottom: 25px;">
+     {{ field.data.lable }}
+    </div>
+    <select ng-init="recordInfo[field.data.id]=field.data.defaultValue" style="right: 24px;padding-bottom: 7px; padding-right: 2px;padding-top: 20px;"  id={{field.data.id}} ng-if="!isGridRecodsShow" ng-model="recordInfo[field.data.id]">
+	<option ng-repeat="option in field.data.type.values">{{option.lable}}</option>
+	</select>
+	<select  ng-if="isGridRecodsShow" style="right: 24px;padding-bottom: 7px; padding-right: 2px;padding-top: 20px;" id={{field.data.id}} ng-model="selectedFormRecordFields[field.data.id]" ng-disabled="{{condition}}">
+	<option ng-repeat="option in field.data.type.values">{{option.lable}}</option>
+	</select>
+  </label>
+</div> 
+	<!-- [CASE-6] CAMERA-->
+	
+	<div ng-switch-when ="camera" ng-class="{ 'Lastdiv' : $index + 1 == fields.length , 'FirstDiv' : $index ==0 }">
+ <label class="item item-input item-stacked-label" ng-click= "openPopover($event,field.data.id,$index)" style="font-weight: bold;"><p ng-show='{{field.data.required}}' style="float:left;color:red;">*</p><div class="input-label">{{ field.data.lable }}</div>
+ <img src="img/cam.png" class="custom-camera" ng-click= "openPopover($event,field.data.id,$index)"/>
+ </label> 
+<div>
+</br>
+
+ <img ng-init="recordInfo[field.data.id] =field.data.id" ng-if="!isGridRecodsShow" ng-src="{{imgeasSet[field.data.id]}}" ng-model="recordInfo[field.data.id]" id={{field.data.id}}> 
+
+<img  ng-if="isGridRecodsShow" ng-src="{{imgeasSet[field.data.id]?imgeasSet[field.data.id]:selectedFormRecordFields[field.data.id]}}" ng-model="recordInfo[field.data.id]" id={{field.data.id}} ng-disabled="{{condition}}">
+
+  </div>
+	 <div class="custom-divider" style="padding-bottom: 30px;margin-left: 11px;"></div>
+	
+</div>
+	
+	
+	<!-- [CASE-7] CALENDER-->
+	
+<div ng-switch-when="calender" ng-class="{ 'Lastdiv' : $index + 1 == fields.length , 'FirstDiv' : $index ==0 }">
+  <ion-item>
+ <label class="item item-input item-stacked-label content-text" style="font-weight: bold;"><p ng-show='{{field.data.required}}' class="mandatory-field">*</p>
+    <div class="input-label">{{ field.data.lable }}</div>
+    <input ng-if="!isGridRecodsShow" type="date" placeholder ='{{field.data.placeHolder}}' ng-required='{{field.data.required}}' id={{field.data.id}} ng-model="recordInfo[field.data.id]" >
+  
+ <input  ng-init="selectedFormRecordFields[field.data.id] = convertToDate(selectedFormRecordFields[field.data.id])" ng-if="isGridRecodsShow" type="date" ng-model="selectedFormRecordFields[field.data.id]" placeholder ='{{field.data.placeHolder}}' ng-required='{{field.data.required}}' id='{{field.data.id}}' ng-readonly="{{condition}}">
+  </label> 
+  </ion-item>
+  </div>
+	
+	
+	<!-- [CASE-8] BARCODE-->
+		
+	<div ng-switch-when ="barcode" style="padding-top: 7px;padding-bottom: 10px;" ng-class="{ 'Lastdiv' : $index + 1 == fields.length , 'FirstDiv' : $index ==0 }">
+ <label style="font-weight: bold; margin-left: 26px;">{{ field.data.lable }}</label> 
+<img src="img/barcode.png" class="custom-barcode" ng-click="scanBarcode($index,field.data.id)">
+
+<input type="text" ng-if="!isGridRecodsShow  " ng-init="{{recordInfo[field.data.id]=Barcode[field.data.id]}}" data-ng-model="recordInfo[field.data.id]" id={{field.data.id}} class="custom-barcode-text"> 
+
+<input  ng-if="isGridRecodsShow" type="text" ng-model='selectedFormRecordFields[field.data.id]' id={{field.data.id}} class="custom-barcode-text" ng-readonly="{{condition}}"> 
+</div>
+
+<!-- [CASE -9] Signature -->
+<div ng-switch-when="sign" ng-class="{ 'Lastdiv' : $index + 1 == fields.length, 'FirstDiv' : $index ==0}">
+  <label class="item item-input item-stacked-label" style="font-weight: bold;"><p ng-show='{{field.data.required}}' class="mandatory-field">*</p><div class="input-label">{{ field.data.lable }}</div></label> 
+ <button class="button button-full " ng-click="openSignatureModal($event,$index,field.data.id);" id={{field.data.id}}  ng-disabled="{{condition}}">open signature pad</button>
+<img ng-init="recordInfo[field.data.id] =field.data.id" ng-if="!isGridRecodsShow" ng-src='{{sign[field.data.id]}}' ng-model="recordInfo[field.data.id]" style="margin-left:35%;" id={{field.data.id}} value="{{field.data.id}}"/>
+
+ <img ng-if="isGridRecodsShow" ng-src="{{sign[field.data.id]?sign[field.data.id]:selectedFormRecordFields[field.data.id]}}" ng-model="recordInfo[field.data.id]" style="margin-left:35%;" id={{field.data.id}} value="{{field.data.id}}"/>
+ </div>  
+
+ <!-- [CASE -10 ] RATING  -->
+  <div ng-switch-when="rating" ng-class="{ 'Lastdiv' : $index + 1 == fields.length , 'FirstDiv' : $index ==0 }">
+  <ion-item>
+  <label class="item item-input item-stacked-label content-text" style="font-weight: bold;"><p ng-show='{{field.data.required}}' class="mandatory-field">*</p>
+		<div class="input-label">{{ field.data.lable }}</div>
+	  
+ <table style="width:100%" ng-if="!isGridRecodsShow"><tr style="width:100%"><td class="range-text">{{field.data.minLable}}</td><td style="width:90%;"><ion-range-slider  min=field.data.min max=field.data.max grid=true  id={{field.data.id}} onchange="recordInfo.value=value" ng-model="recordInfo.value"></ion-range-slider></td><td class="range-text">{{field.data.maxLable}}</td></tr></table> 
+
+    <output id="recordInfo"></output> 
+	
+	 <table name="{{field.data.id}}" style="width:100%"  ng-if="isGridRecodsShow" ng-required='{{field.data.required}}'><tr style="width:100%"><td class="range-text">{{field.data.minLable}}</td><td style="width:90%;"><ion-range-slider type="single" ng-model="selectedFormRecordFields[field.data.id]" min=field.data.min max=field.data.max from=selectedFormRecordFields[field.data.id] grid=true onchange="recordInfo.value=value" ng-model="recordInfo.value" id={{field.data.id}}></ion-range-slider></td><td class="range-text">{{field.data.maxLable}}</td>
+	
+
+	 </tr></table> 
+
+	 
+	
+  </ion-item>
+ </div> 
+	
+  </div>
+  </div>
+  

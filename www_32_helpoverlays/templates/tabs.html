@@ -1,0 +1,17 @@
+<ion-tabs class="tabs-icon-top tabs-custom custom-tabs" ng-class="tabsactive">
+  <ion-tab title="Dashboard" icon-on="ion-dashboard-before light" icon-off="ion-dashboard-after light" href="#/tab/dashboard" >
+    <ion-nav-view name="dashboard-tab"></ion-nav-view>
+  </ion-tab> 
+
+  <ion-tab title="Jobs" icon-on="ion-task-after" icon-off="ion-task-before" href="#/tab/assignedtasks"  >
+    <ion-nav-view name="task-tab"></ion-nav-view>
+  </ion-tab>
+
+  <ion-tab title="Notifications" icon-on="ion-notification-after" icon-off="ion-notification-before" href="#/tab/notifications">
+    <ion-nav-view name="notification-tab"></ion-nav-view>
+  </ion-tab>
+
+  <ion-tab title="Settings" icon-on="ion-settings-after" icon-off="ion-settings-before" href="#/tab/settings">
+    <ion-nav-view name="settings-tab"></ion-nav-view>
+  </ion-tab>
+</ion-tabs>

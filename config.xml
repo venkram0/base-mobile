@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.mm.formsz.ue" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>UE Carding</name>
+    <description>
+        An Ionic Framework and Cordova project.
+    </description>
+    <author email="hi@ionicframework" href="http://ionicframework.com/">
+      Ionic Framework Team
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+    <preference name="LoadUrlTimeoutValue" value="5000000" />
+    <preference name="webviewbounce" value="false" />
+    <preference name="UIWebViewBounce" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="BackupWebStorage" value="none" />
+    <preference name="SplashScreen" value="none" />
+    <feature name="StatusBar">
+        <param name="ios-package" onload="true" value="CDVStatusBar" />
+    </feature>
+    <platform name="android">
+        <icon density="ldpi" src="resources\android\icon\drawable-ldpi-icon.png" />
+        <icon density="mdpi" src="resources\android\icon\drawable-mdpi-icon.png" />
+        <icon density="hdpi" src="resources\android\icon\drawable-hdpi-icon.png" />
+        <icon density="xhdpi" src="resources\android\icon\drawable-xhdpi-icon.png" />
+        <icon density="xxhdpi" src="resources\android\icon\drawable-xxhdpi-icon.png" />
+        <icon density="xxxhdpi" src="resources\android\icon\drawable-xxxhdpi-icon.png" />
+    </platform>
+    <icon src="resources\android\icon\drawable-xhdpi-icon.png" />
+    <engine name="android" spec="^6.2.3" />
+    <plugin name="cordova-plugin-camera" spec="^2.4.1" />
+    <plugin name="cordova-plugin-compat" spec="^1.1.0" />
+    <plugin name="cordova-plugin-device" spec="^1.1.6" />
+    <plugin name="cordova-plugin-geolocation" spec="^2.4.3" />
+    <plugin name="cordova-plugin-inappbrowser" spec="^1.7.1" />
+    <plugin name="cordova-plugin-keyboard" spec="^1.1.5" />
+    <plugin name="cordova-plugin-network-information" spec="^1.3.3" />
+    <plugin name="cordova-plugin-splashscreen" spec="^4.0.3" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.2.3" />
+    <plugin name="cordova-plugin-whitelist" spec="^1.3.2" />
+    <plugin name="cordova-plugin-x-toast" spec="^2.6.0" />
+    <plugin name="cordova-sqlite-storage" spec="^2.0.4" />
+    <plugin name="phonegap-plugin-barcodescanner" spec="^6.0.6" />
+</widget>

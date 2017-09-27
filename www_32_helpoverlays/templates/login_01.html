@@ -1,0 +1,27 @@
+<ion-view>
+   
+    <ion-content style="background-color:#f38022">
+        <div class="hero no-header flat">
+            <div class="content">
+                 <div class="app-icon"></div> 
+                <h1></h1>
+            </div>
+        </div>
+		<form ng-submit="login(user)" method="" style="margin-top: -30px;">
+        <div class="list inputfields">
+             <ion-md-input placeholder="Username" highlight-color="balanced" type="text" data-ng-model="user.username"></ion-md-input> 
+		
+            <ion-md-input placeholder="Password" highlight-color="energized" type="password" data-ng-model="user.password" required></ion-md-input>
+			
+        </div>
+		 
+        <div class="loginbt-padding">
+		 <input type="submit" value="SIGN IN"/>
+         <!-- <input type="text" disabled> -->
+         <h2 ng-click="forgotPassword()" class="frgtpwd"> Forgot Password ?</h2>
+       </div>
+       
+       </form>
+    </ion-content>
+</ion-view>
+ 

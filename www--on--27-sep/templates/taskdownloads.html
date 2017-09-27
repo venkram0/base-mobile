@@ -1,0 +1,22 @@
+
+<ion-view  style="background-color:#eee;" hide-nav-bar="true">
+	 <ion-content direction="y" scrollbar-y="false" class="custom-subtabs">
+		
+		<ion-list class="custom-content-reassign">
+
+			<ion-item ng-repeat="item in taskItems" class="formscontainer shadow">
+				<img src="img/Form.png" class="container-image" />
+				<p class="form-lable">{{item.TaskName}}</p>
+				
+				<ion-option-button class="custom-button-history" ng-click="ShowTaskForms(item);" >
+				 <b class="slide-text-history">Forms</b>
+				</ion-option-button> 
+				
+			</ion-item>
+		</ion-list>
+		<div ng-if="taskItems !== undefined && !taskItems.length" class="no-results">
+			 <p class="custom-nohistory" style="margin-top: 56px;">No Downloaded Tasks</p>
+		</div>
+		
+	</ion-content> 
+</ion-view> 

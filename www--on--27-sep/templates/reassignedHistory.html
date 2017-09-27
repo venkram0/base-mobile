@@ -1,0 +1,32 @@
+
+	<ion-header-bar class="bar-positive formdetails-header-bar">
+	<div class="custom_header_back" ng-click="backToHistory();"><img src="img/back.png" class="header-back" ></div>
+	 <div style="margin-left: 45%;margin-top: 10px;"><img src="img/header_delete.png" ng-hide="header_delete_hide" class="header_delete" ng-click="deleteAllRecord(selection);" > 
+	<img src="img/header_sync.png" ng-hide="header_sync_hide" class="heder_sync" ng-click="syncAllOfflineForm(selection);" > </div> 
+	<img src="img/ellipse.png" ng-hide="hide_history_ellipse" class="selectOptions" ng-click="openPopover();" > 
+	
+	</ion-header-bar>
+	
+<ion-view  style="background-color:#eee;" hide-nav-bar="true">
+  
+				<ion-content direction="y" scrollbar-y="false">
+				<ion-refresher pulling-icon="ion-arrow-down-b" on-refresh="refreshItems()">
+				</ion-refresher>
+				<ion-list class="custom-content">
+				
+				<ion-item ng-repeat="item in items" class="formscontainer shadow" ng-click="viewCommentsPopup(item)">
+				<img src="img/Form.png" class="container-image" />
+				<p class="form-lable">{{item.id}}</p>
+				
+				<ion-option-button class="custom-button-sync"  ng-click="syncReassignFormOnline(item);" ng-hide="sync_hide">
+					 <b class="slide-text-download">Sync</b>	
+				 </ion-option-button> 
+				 
+				 
+				  </ion-item> 
+				</ion-list>
+					<div ng-if="items !== undefined && !items.length" class="no-results">
+							  <p class="custom-nohistory">No History Found</p>
+							</div>
+					</ion-content>
+</ion-view> 

@@ -1,0 +1,48 @@
+ <ion-header-bar class="bar-custom formdetails-header-bar">
+	<div class="custom_header_back" ng-click="backTorecords();">
+		<img src="img/back.png" class="header-back" style="margin-top: 12px !important;">
+	</div>
+	<h3 class="header_formname" ng-show="NavigatedFrom=='tasks'">{{taskname}}</h3>
+	<!-- <input class="autoComplete"  id="autocomplete" ng-if="autocomplete" type="text" data-tap-disabled="true" ng-model="search" ng-change='disableTap()' focus-me="shouldBeOpen" google-directive google-directive-fn="getlatlngfromaddress"/>
+	<button class="button button-icon icon ion-ios-search-strong map-custom-search" ng-if="searchIcon" ng-click="showFilterBar()" style="box-shadow: none;">
+    </button>
+	<button class="button button-icon icon ion-ios-close-outline custom-clear" ng-if="clearIcon" ng-click="hideSearch()" style="box-shadow: none;">
+	</button> -->
+	
+    <div style="margin-left: 150px;width: 40px;" ui-sref="tabs.assignedtasks">
+        <img src="img/List_view.png" class="switchtolist" >
+    </div> 
+	</ion-header-bar>
+<ion-view  style="background-color:#eee;" hide-nav-bar="true">
+	<ion-content direction="y" scrollbar-y="false">
+
+    <div style="border-bottom:2px solid #CACACA;">
+	<leaflet data-tap-disabled="true" center="center"
+             markers="markers"
+			 legend="legend"
+             layers="layers"
+             height="{{MapHeight}}" 
+             width="100%">
+    </leaflet data-tap-disabled="true">
+   <div class="row" style="z-index: 99;position: fixed !important;background-color: #ffffff;border: 1px;top: 10%;margin-bottom: -30px;width: auto !important;left: 10px;border-radius: 10px; opacity: 0.9;">
+		<div class="list">
+		   <div class="item" style="width: 102%;padding-top: 5px; padding-bottom: 5px;padding-left: 5px;"><img src="img/green.png" style="    width: 15px;"> Carding</div>
+		   <div class="item" style="width: 102%;padding-top: 5px;
+    padding-bottom: 5px;padding-left: 5px;"><img src="img/blue.png" style="width: 15px;"> Non-Carding</div>
+		</div>
+    </div>
+    <div class="leaflet-custom leaflet-right">
+	     <div class="leaflet-controls-layers leaflet-control" aria-haspopup="true">
+	      <a class="leaflet-controls-layers-toggle1" href="#" title="Navigate" ng-click="goTOCurrentLocation()"></a>
+	      <a class="leaflet-controls-layers-toggle2" href="#" title="Add"></a>
+	     </div>
+    </div>
+	</div>
+	<ion-list class="map-content" ng-controller="taskHistoryCtrl">
+	</ion-list>
+	</ion-content>
+	<!-- <div class="mapimg-brd-nav">
+				<img src="img/navigate.png" class="switchtomapview" ng-click="goTOCurrentLocation()">
+	  </div> -->
+	
+ </ion-view>

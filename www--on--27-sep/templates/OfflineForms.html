@@ -1,0 +1,26 @@
+ <ion-header-bar class="bar-positive formdetails-header-bar">
+  <h1 class="title tabs-title-lable">Downloaded</h1>
+<!-- 	<button class="button button-icon icon ion-ios-search-strong custom-search" ng-click="showFilterBar()" style="box-shadow: none;">
+	</button>  -->
+</ion-header-bar>
+
+<ion-view  style="background-color:#eee;" hide-nav-bar="true" >
+	 <ion-content direction="y" scrollbar-y="false">
+		<ion-refresher pulling-icon="ion-arrow-down-b" on-refresh="refreshItems()">
+		</ion-refresher>
+
+     <ion-tabs class="tabs-striped tabs-top tabs-icon-only tabs-positive subtabs-edit subtabs-text subtabs-nonactivate" delegate-handle="myhandle">
+       
+        <ion-tab title="Formsz"  href="#/tab/OfflineForms/generalforms" ng-click="inProgressForms()">
+          <ui-view name="OfflineForms-tab"></ui-view>
+        </ion-tab>
+        <ion-tab title="{{tabAction}} " href="#/tab/OfflineForms/taskdownloads" ng-click="ShowDownloadedTasks()">
+          <ui-view name="OfflineForms-tab"></ui-view>
+        </ion-tab>
+         <ion-tab icon-on="ion-assigned" icon-off="ion-reasssinged" href="#/tab/OfflineForms/reassigneddownloads" ng-click="showReassignedDownloadedForms()">
+          <ui-view name="OfflineForms-tab"></ui-view>
+        </ion-tab> 
+      </ion-tabs>
+		
+	</ion-content> 
+</ion-view> 

@@ -1,0 +1,145 @@
+<!-- <ion-header-bar class="bar-custom formdetails-header-bar" ng-init="dashboardStatistics()">
+   <h1 class="title tabs-title-lable" style="text-align: center;"> Dashboard</h1>
+</ion-header-bar>
+	
+<ion-view  style="top: -50px;" hide-nav-bar="true">
+  
+<ion-content direction="y" scrollbar-y="false" style="position:absolute;">
+
+	<div style="position:absolute;width:100%" ng-if="status">
+		<div class="custom-dashboard">
+			<div class="row" style="border-top: 1px solid #EEE;border-bottom: 1px solid #EEE;">
+				<div style="margin: 44px 0px 0px 55px;">
+					<ul class="custom-ol">
+					  <li style="color:#16c2e7">
+					  	<span class="align-left">Completed</span> 
+					  	<span class="align-right">&nbsp;:&nbsp;{{completed}}</span> 
+					  </li>
+					  <li style="color:#098eab">
+					  	<span class="align-left">Pending</span> 
+					  	<span class="align-right">&nbsp;:&nbsp;{{pending}}</span>
+					  </li>
+					</ul> 
+				</div>
+				<div class="progress-wrapper">
+					<div class="progress_A">
+	            		{{overAllTasks}}
+	        		</div>	
+					<div>
+						<round-progress
+					    current="completed"
+					    max="overAllTasks"
+					    color="#16c2e7"
+					    bgcolor="#098eab"
+					    radius="50"
+					    stroke="10"
+					    semi="false"
+					    rounded="false"
+					    clockwise="true"
+					    responsive="false"
+					    duration="800"
+					    animation="easeInOutQuart"
+					    animation-delay="0" style="right: -60px;top: 25px;"></round-progress>
+				    	<h5 style="margin-top: 30px;float: right;margin-right: -28px;color: #a59b9b;"> Jobs</h5>
+				    </div>
+				</div>
+    		</div>
+		</div>
+
+		<div class="custom-dashboard">
+			<div class="row" style="border-top: 1px solid #EEE;border-bottom: 1px solid #EEE;">
+				<div class="progress-wrapper">
+					<div class="progress">
+	            		{{cardingRange}}
+	        		</div>	
+					<div>
+						<round-progress
+					    max="cardingRange"
+					    current= "cardedAddress"
+					    color="#4a8f00"
+					    bgcolor="#047ad1"
+					    radius="50"
+					    stroke="10"
+					    semi="false"
+					    rounded="false"
+					    clockwise="true"
+					    responsive="false"
+					    duration="800"
+					    animation="easeInOutQuart"
+					    animation-delay="0" style=" left: 20px;top: 25px;"></round-progress>
+	    				<h5 style="margin-top: 30px;float: right;margin-right: 0px;color: #a59b9b;"> Addresses</h5>
+	    			</div>
+    			</div>
+
+			    <div style="margin: 50px 0px 0px 95px;">
+					<ul class="custom-ol">
+					  <li class="carderd_text">
+					  	<span class="align-left">Carded</span> 
+					  	<span class="align-right">&nbsp;:&nbsp;{{cardedAddress}}</span>
+					  </li>
+					  <li class="noncarderd_text">
+					  	<span class="align-left">Non-carded</span> 
+					  	<span class="align-right">&nbsp;:&nbsp;{{noncardedAddress}}</span>
+					  </li>
+					</ul> 
+				</div>
+    		</div>
+		</div>
+	</div>
+	<div ng-if="!status" style="margin-top: 50%;">
+  <center>
+  <img src="img/Offline.png" style="width: 150px;height: 150px;">
+  </center>
+ </div>
+
+</ion-content> 
+</ion-view>
+ -->
+<div id="container">
+      <button type="button" ng-click="onClick(1)">Show Transparency Classic Demo</button>
+      <button type="button" ng-click="onClick(2)">Show Transparency Classic With Arrow Demo</button>
+      <button type="button" ng-click="onClick(3)">Show Image Demo</button>
+      <button type="button" ng-click="onClick(4)">Show Tip Demo</button>
+      <div>
+        <div id="focus-item">Focus Here</div>
+      </div>
+      <walkthrough
+            wid="Demo1"
+            walkthrough-type="transparency"
+            focus-element-selector="#focus-item"
+            icon="single_tap"
+            main-caption="{{demoCaption1}}"
+            icon-padding-left="0"
+            icon-padding-top="20"
+            is-active="demoActive1">
+            </walkthrough>
+      <walkthrough
+            wid="Demo2"
+            walkthrough-type="transparency"
+            focus-element-selector="#focus-item"
+            icon="arrow"
+            main-caption="{{demoCaption2}}"
+            icon-padding-left="30"
+            icon-padding-top="0"
+            force-caption-location="TOP"
+            is-active="demoActive2"
+            use-button="true">
+      </walkthrough>
+      <walkthrough
+            wid="Demo3"
+            walkthrough-type="transparency"
+            is-active="demoActive3">
+        <img src="https://rawgit.com/souly1/ng-walkthrough/master/screenshots/screenshot3.png" style="height: 100vh; width: 100%;">
+      </walkthrough>
+      <walkthrough
+            wid="Demo4"
+            is-active="demoActive4"
+            walkthrough-type="tip"
+            icon="https://rawgit.com/souly1/ng-walkthrough/master/screenshots/myLogo.png"
+            tip-icon-location="FRONT"
+            tip-location="TOP"
+            main-caption="{{demoCaption4}}"
+            tip-color="BLACK"
+            use-button="true">
+      </walkthrough>
+    </div>

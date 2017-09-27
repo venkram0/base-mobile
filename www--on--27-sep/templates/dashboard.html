@@ -1,0 +1,93 @@
+<ion-header-bar class="bar-custom formdetails-header-bar" ng-init="dashboardStatistics()">
+   <h1 class="title tabs-title-lable" style="text-align: center;"> Dashboard</h1>
+</ion-header-bar>
+	
+<ion-view  style="top: -50px;" hide-nav-bar="true">
+  
+<ion-content direction="y" scrollbar-y="false" style="position:absolute;">
+	<div style="position:absolute;width:100%">
+		<div class="custom-dashboard">
+			<div class="row chart_border">
+				<div class="col col-50">
+				<div class="row" style="margin-left: 25px !important;margin-top: 50px !important;">
+					<ul class="custom-ol">
+					  <li class="chart_completed">
+					  	<span class="align-left">Completed</span> 
+					  	<span class="align-right">&nbsp;:&nbsp;{{completed || "0"}}</span> 
+					  </li>
+					  <li class="chart_pending">
+					  	<span class="align-left">Pending</span> 
+					  	<span class="align-right">&nbsp;:&nbsp;{{pending || "0"}}</span>
+					  </li>
+					</ul> 
+				</div>
+				</div>
+				<div class="progress-wrapper col col-50">
+					<div class="progress_A">
+	            		{{overAllTasks || "0"}}
+	        		</div>	
+					<div>
+						<round-progress
+					    current="completed"
+					    max="overAllTasks"
+					    color="#16c2e7"
+					    bgcolor="#098eab"
+					    radius="50"
+					    stroke="10"
+					    semi="false"
+					    rounded="false"
+					    clockwise="true"
+					    responsive="false"
+					    duration="800"
+					    animation="easeInOutQuart"
+					    animation-delay="0" style="top: 25px;"></round-progress>
+				    	<h5 style="margin-top: 30px;margin-left: 35px;color: #a59b9b;"> Jobs</h5>
+				    </div>
+				</div>
+    		</div>
+		</div>
+
+		<div class="custom-dashboard">
+			<div class="row chart_border">
+				<div class="progress-wrapper col col-50">
+					<div class="progress">
+	            		{{cardingRange || "0"}}
+	        		</div>	
+					<div>
+						<round-progress
+					    max="cardingRange"
+					    current= "cardedAddress"
+					    color="#4a8f00"
+					    bgcolor="#047ad1"
+					    radius="50"
+					    stroke="10"
+					    semi="false"
+					    rounded="false"
+					    clockwise="true"
+					    responsive="false"
+					    duration="800"
+					    animation="easeInOutQuart"
+					    animation-delay="0" style=" left: 20px;top: 25px;"></round-progress>
+	    				<h5 style="margin-top: 30px;padding-left:35px;margin-right: 0px;color: #a59b9b;"> Addresses</h5>
+	    			</div>
+    			</div>
+
+			    <div class="col col-50">
+			    	<div class="row" style="margin-left: 20px !important;margin-top: 50px !important;">
+						<ul class="custom-ol">
+						  <li class="carderd_text">
+						  	<span class="align-left">Carded</span> 
+						  	<span class="align-right">&nbsp;:&nbsp;{{cardedAddress || "0"}}</span>
+						  </li>
+						  <li class="noncarderd_text">
+						  	<span class="align-left">Non-carded</span> 
+						  	<span class="align-right">&nbsp;:&nbsp;{{noncardedAddress || "0"}}</span>
+						  </li>
+						</ul>
+					</div> 
+				</div>
+    		</div>
+		</div>
+	</div>
+</ion-content> 
+</ion-view>

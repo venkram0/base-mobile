@@ -1,0 +1,35 @@
+ <ion-header-bar class="bar-positive formdetails-header-bar">
+	<div class="custom_header_back" ng-click="backToTasks();"><img src="img/back.png" class="header-back" ></div>
+	<h3 class="header_formname">{{taskname}}</h3>
+	<div class="task_header">
+	 <!-- <button class="button button-icon icon ion-ios-search-strong custom-search" ng-click="showFilterBar()" style="box-shadow: none;top:0px">
+    </button> -->
+	<img src="img/ellipse.png" class="selectOptions" ng-click="openellipsePopover(item);"> 
+	
+	</div>
+	</ion-header-bar>
+	
+<ion-view  style="background-color:#eee;" hide-nav-bar="true">
+  
+				<ion-content direction="y" scrollbar-y="false">
+				<ion-refresher pulling-icon="ion-arrow-down-b" on-refresh="refreshTaskForms()">
+				</ion-refresher>
+				<ion-list class="custom-content">
+				
+				   <ion-item ng-repeat="item in TaskForms" class="formscontainer shadow" ng-click="TaskFormsHistoryOffline(item)">
+				  <img src="img/Form.png" class="container-image" />
+					<p class="form-lable">{{item.FormName}}</p>
+					<ion-option-button class="custom-button-download" ng-click="downloadFormsOfTask(item)" ng-hide="task_download_button">
+					 <b class="slide-text-download">Download</b>
+					 </ion-option-button>
+					 <ion-option-button class="custom-button-info" ng-click="formInfo(item)">
+						 <b class="slide-text-info">Info</b>
+						 </ion-option-button>  
+												
+				  </ion-item>
+				</ion-list>
+					<div ng-if="items !== undefined && !items.length" class="no-results">
+							  <p class="custom-noforms">No Formsz Available</p>
+							</div>
+					</ion-content>
+</ion-view>

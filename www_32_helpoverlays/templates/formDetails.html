@@ -1,0 +1,31 @@
+<ion-header-bar class="bar-custom formdetails-header-bar" ng-init="getformSkeleton();">
+   <div class="custom_header_back" ng-click="back();">
+    <img src="img/back.png" class="header-back">
+    </div>
+    <h3 class="header_formname"><dots>{{formname}}</dots></h3>
+  <button class="button button-icon button-clear custom-save-button" ng-hide="saveButton" ng-click="saveOfflineForm(fieldsform.$valid)">save
+   </button> 
+   <button class="button button-icon button-clear custom-submit-button" ng-hide="submitButton" ng-click="saveForm(fieldsform.$valid,'submit')">submit
+   </button> 
+ <!--   <img src="img/ellipse.png" class="selectOptions" ng-hide="formEllipse" ng-click="openellipsePopover();">  -->
+</ion-header-bar>
+
+<ion-view hide-nav-bar="true">
+  
+   <form name="fieldsform" novalidate="">
+   
+    <ion-content style="background-color:#eee;">
+   
+      <ion-list>
+         <div ng-repeat="field in fields">
+            <div data-ng-include="'templates/groupWidgetsPreview.html'" ng-if="!prepopDataShow"></div>
+            <div data-ng-include="'templates/prepopDataShow.html'" ng-if="prepopDataShow"></div>
+         </div>
+      </ion-list>
+   
+   </ion-content>
+<!--    	  <div class="mapimg-brd" ng-show="mapAllowed">
+				<img src="img/Map.png" class="switchtomapview" ng-click="openMap()">
+	  </div> -->
+   </form>   
+</ion-view>

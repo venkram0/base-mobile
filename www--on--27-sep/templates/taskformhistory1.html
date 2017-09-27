@@ -1,0 +1,83 @@
+
+	<ion-header-bar class="bar-custom formdetails-header-bar" ng-init="Tformhistory();">
+		<div class="custom_header_back" ng-click="backToTaskForms();">
+			<img src="img/back.png" class="header-back" ng-show="task_action_header">
+		</div>
+		<div class="custom_header_cancel" ng-click="clearSelection();"  ng-hide="task_action_header">
+			<img src="img/cancel.png" class="header-cancel" style="margin-left: -30px;">
+		</div>
+		<h3 class="header_formname" ng-show="task_action_header">{{taskname}}</h3>
+
+		<!-- <button class="button button-icon icon ion-ios-search-strong custom-search" ng-click="showFilterBar()" style="box-shadow: none;top:0px">
+    	</button> -->
+	
+		<div style="margin-left: 150px;width: 40px;"  ng-click="openMap();">
+	        <img src="img/Map_View.png" class="switchtolist" >
+	    </div> 
+	    <!-- <div style="width: 40px;" ng-show="task_action_header" ng-click="openPopover();">  
+		    <img src="img/ellipse.png"  class="selectOptions" > 
+	    </div> -->
+	</ion-header-bar>
+	
+	<ion-view  style="background-color:#eee;" hide-nav-bar="true">
+		<ion-content direction="y" scrollbar-y="false" style="top: 42px;">
+			<ion-refresher pulling-icon="ion-arrow-down-b" on-refresh="refreshOfflineRecords()">
+			</ion-refresher>
+			<ion-list class="custom-content">
+				<!-- <ion-item ng-repeat="item in offlineTaskformhistory" class="formscontainer shadow" ng-click="editTaskForm(item)">
+				<input type="checkbox" ng-if="selectCheckBox" class="custom-selectBox"
+				ng-checked="selection.indexOf(item.recordId) > -1" ng-click="toggleSelection(item.recordId);$event.stopPropagation();" />
+				
+				<input type="checkbox" ng-if="selectAllCheckBox" ng-model="selectedAll" class="custom-selectBox" /> 
+				
+				<img src="img/Form.png" class="container-image" ng-click="editTaskForm(item)"/>
+				<p class="form-lable">{{item.recordId}}</p> -->
+
+				<ion-item ng-repeat="item in offlineTaskformhistory" class="formscontainer shadow">
+				<input type="checkbox" ng-if="selectCheckBox" class="custom-selectBox"
+				ng-checked="selection.indexOf(item.recordId) > -1" ng-click="toggleSelection(item.recordId);$event.stopPropagation();" />
+				
+				<input type="checkbox" ng-if="selectAllCheckBox" ng-model="selectedAll" class="custom-selectBox"/> 
+				
+				<img src="img/Form.png" class="container-image" ng-click="editTaskForm(item)" />
+				<p class="form-lable" style="width:50%;" ng-click="editTaskForm(item)" >{{item.recordId}}</p>
+
+				<ion-option-button class="custom-button-delete" ng-click="deleteRecord(item)" ng-hide="delete_hide">
+				 <b class="slide-text-download">Delete</b>
+				</ion-option-button> 
+						
+				<ion-option-button class="custom-button-sync"  ng-click="syncOfflineForm(item);" ng-hide="sync_hide">
+			 		<b class="slide-text-download">Submit</b>	
+			 	</ion-option-button>   
+				</ion-item>
+				<!-- <p ng-if="offlineTaskformhistory.length == 0" style="text-align: center;color: #595d65;margin-top:10px;">No Saved Addresses</p>  -->
+			</ion-list>
+
+			<ion-list class="custom-content">
+			
+			   <ion-item ng-repeat="item in prepopRecords" class="formscontainer shadow" ng-click="getPrePoprecord(item)">
+			  	<img src="img/Form.png" class="container-image"/>
+				<p class="form-lable" style="width: 84%;">{{item.recordName}}
+					<!-- <p class="form-lable">{{item.recordName[0]}} -->
+					<br>
+					<!-- <span class="custom-subText">{{item.recordName}}</span> -->
+				</p>
+                <ion-option-button class="custom-button-navigate" ng-click="navigateToLocationFromPrepop(item.recordId)" >
+					 <b class="slide-text-download">Navigate</b>
+				</ion-option-button>
+
+			<!-- <ion-option-button class="custom-button-sync"  ng-click="syncOfflineForm(item)" ng-hide="sync_hide">
+				 <b class="slide-text-download">Submit</b>	
+				 </ion-option-button>   -->
+			  </ion-item>
+			</ion-list>
+
+			<div ng-if="offlineTaskformhistory !== undefined && !offlineTaskformhistory.length" class="no-results" style="padding-top: 155px;" ng-show="noTaskFormrecords">
+				<p class="custom-nohistory">No jobs available <br>
+			</div>
+		</ion-content>
+
+        <button class="button button-fab button-fab-bottom-right button-dark" ng-show="addrecordicon" ng-click="getTaskFormDetails()">
+ 		  <i class="icon ion-plus"></i>
+ 		</button>
+</ion-view> 

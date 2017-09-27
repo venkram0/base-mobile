@@ -1,0 +1,273 @@
+<div ng-switch="field.type.view">
+<!-- <div ng-if="prepopDataShow" ng-switch="parent.field.type.view"> -->
+<div class="skeleton-content" ng-class="{ 'Lastdiv' : $index + 1 == fields.length, 'FirstDiv' : $index ==0 }">
+
+<!--[CASE-1] TEXTBox-->
+ <div ng-switch-when="textbox" ng-class="{ 'Lastdiv' : $index + 1 == fields.length , 'FirstDiv' : $index ==0 }" ng-if="!isDependentField(field.id)"  showErrors>
+  <ion-item>
+ <label class="item item-input item-stacked-label content-text" style="font-weight: bold;"><p ng-show='{{field.required}}' class="mandatory-field">*</p>
+    
+	<div class="input-label">{{ field.lable }}</div>
+	
+    <input type="text" ng-if="((!isGridRecodsShow) && (field.inputType=='Text'))" ng-init="recordInfo[field.id]=field.defaultValue" placeholder ='{{field.placeHolder}}' name="{{field.id}}" ng-required='{{field.required}}' id={{field.id}} ng-model="recordInfo[field.id]" ng-readonly="{{field.readOnly}}" ng-disabled="isReadonlyDependField(field.id)">
+    
+    <input  ng-if="((!isGridRecodsShow) && (field.inputType=='Email'))" ng-init="recordInfo[field.id] =field.defaultValue" type="email" ng-model="recordInfo[field.id]"  name="{{field.id}}" placeholder ='{{field.placeHolder}}' ng-required='{{field.required}}'>
+ 	 
+
+	<input  ng-if="((!isGridRecodsShow) && (field.inputType=='Number') && (field.isInptAllowDecimals=='yes'))"  ng-init="recordInfo[field.id] =field.defaultValue" type="text"
+            minlength="{{field.minInputVal}}" maxlength="{{field.maxInputVal}}" ng-model="recordInfo[field.id]"  name="{{field.id}}" placeholder ='{{field.placeHolder}}'   ng-required='{{field.required}}'  ng-hide="decimalTextBox" decimals-only >
+   
+    <input  ng-if="((!isGridRecodsShow) && (field.inputType=='Number') && !(field.isInptAllowDecimals=='yes'))" ng-init="recordInfo[field.id] =field.defaultValue" type="text" 
+    minlength="{{field.minInputVal}}" maxlength="{{field.maxInputVal}}"
+     ng-model="recordInfo[field.id]"  name="{{field.id}}" placeholder ='{{field.placeHolder}}' numbers-only  ng-required='{{field.required}}' ng-hide="normalTextBox">
+
+
+  <input type="text" ng-if="((isGridRecodsShow) && (field.inputType=='Text'))" name="{{field.id}}"  ng-required='{{field.required}}' id={{field.id}} ng-model="selectedFormRecordFields[field.id]" ng-readonly="{{condition}}"> 
+	
+	<input type="email" ng-if="((isGridRecodsShow) && (field.inputType=='Email'))" name="{{field.id}}" placeholder ='{{field.placeHolder}}' ng-required='{{field.required}}' id={{field.id}} ng-model="selectedFormRecordFields[field.id]" ng-readonly="{{condition}}" > 
+	
+	<input type="text" ng-if="((isGridRecodsShow) && (field.inputType=='Number') && (field.isInptAllowDecimals=='yes'))" name="{{field.id}}" placeholder ='{{field.placeHolder}}' ng-required='{{field.required}}'  minlength="{{field.minInputVal}}" maxlength="{{field.maxInputVal}}" id={{field.id}} ng-model="selectedFormRecordFields[field.id]" ng-readonly="{{condition}}" decimals-only> 
+	
+	<input type="text" ng-if="((isGridRecodsShow) && (field.inputType=='Number') && !(field.isInptAllowDecimals=='yes'))" name="{{field.id}}" placeholder ='{{field.placeHolder}}' ng-required='{{field.required}}' minlength="{{field.minInputVal}}" maxlength="{{field.maxInputVal}}" id={{field.id}} ng-model="selectedFormRecordFields[field.id]" ng-readonly="{{condition}}" numbers-only> 
+	
+  </label> 
+  <div ng-show="((fieldsform[field.id].$error.email) && (fieldsform[field.id].$dirty))" class="field-error-text">Not a valid email!</div> 
+ 
+  <div ng-show="((fieldsform[field.id].$error.required) && (fieldsform[field.id].$dirty))" class="field-error-text">Field is required</div>
+  </ion-item>
+  
+  </div>
+
+<!--[CASE-2] TEXTAREA -->
+<div ng-switch-when ="textarea" ng-class="{ 'Lastdiv' : $index + 1 == fields.length , 'FirstDiv' : $index ==0 }" ng-if="!isDependentField(field.id)" showErrors>
+ <label class="item item-input item-stacked-label" style="font-weight: bold;"><p ng-show='{{field.required}}' class="mandatory-field">*</p><div class="input-label">{{ field.lable }}</div></label> 
+<ion-item style="padding-top: 0px !important;min-height:15px !important;">
+ 
+ <textarea  name={{field.id}} ng-if="!isGridRecodsShow" placeholder='{{field.placeHolder}}' id={{field.id}} style="width: 101%;border-bottom: 1px solid;border-color: #ccc;" minlength="{{field.minInputVal}}" maxlength="{{field.maxInputVal}}" ng-model="recordInfo[field.id]" ng-required='{{field.required}}'  ng-disabled="isReadonlyDependField(field.id)"></textarea>
+
+ <textarea  ng-if="isGridRecodsShow" name="{{field.id}}" id={{field.id}} style="width: 101%;border-bottom: 1px solid;border-color: #ccc;" minlength="{{field.minInputVal}}" maxlength="{{field.maxInputVal}}" ng-model="selectedFormRecordFields[field.id]" ng-required='{{field.required}}' ng-readonly="{{condition}}" ></textarea>
+ 
+ 	<div ng-show="((fieldsform[field.id].$error.required) && (fieldsform[field.id].$dirty))" class="field-error-text">Field is required</div>
+ 	<div ng-show=" fieldsform[field.id].$invalid"></div>
+    <div ng-show="((fieldsform[field.id].$error.minlength)< (field.minInputVal))" class="field-error-text">Field length is too short</div> 
+    <div ng-show="((fieldsform[field.id].$error.maxlength)>(field.maxInputVal))" class="field-error-text">Field length should not exceed '{{field.maxInputVal}}' characters></div>	            
+</ion-item>
+
+</div>
+
+
+<!-- [CASE-3] CHECKBOX -->
+<div ng-switch-when ="checkbox" ng-class="{ 'Lastdiv' : $index + 1 == fields.length , 'FirstDiv' : $index ==0 }" ng-if="!isDependentField(field.id)">
+ <label class="item item-input item-stacked-label" style="font-weight: bold;"><p ng-show='{{field.required}}' class="mandatory-field">*</p><div class="input-label">{{ field.lable }}</div>
+ </label>
+
+ <ion-item  class="content-checkbox">
+	<ion-list>
+		<ion-item ng-repeat="item in field.type.values" ng-required='{{field.required}}'>
+	
+	
+    <ion-checkbox name="{{field.id}}" ng-if="!isGridRecodsShow" ng-model="ischekkk"  ng-change="toggleSelection(item.lable,field.id)" >{{ item.lable }}
+    </ion-checkbox> 
+
+       <div ng-if="isGridRecodsShow">
+      <ion-checkbox  ng-init="isCheked =  isContains(selectedFormRecordFields[field.id] , item.lable) " name={{field.id}} ng-model="isCheked" ng-change="toggleSelection(item.lable,field.id)"  ng-disabled="{{condition}}" >{{ item.lable }}</ion-checkbox> 
+     </div>
+
+     <!--  <div>
+      <ion-checkbox   ng-init="isCheked =  isContains(selectedFormTasksRecordFields[field.id] , item.lable) " name={{field.id}} ng-model="isCheked" ng-change="toggleSelection(field.id,item.lable)"  ng-disabled="{{condition}}">{{ item.lable }}</ion-checkbox> 
+     </div> -->
+	
+		</ion-item>
+	</ion-list>
+	
+ <div class="field-error-text" ng-show="((selected[field.id].length==0) && (field.required) && (fieldsform[field.id].$valid) && (fieldsform[field.id].$dirty))">
+   		This feild is Required
+	</div> 
+</ion-item>	
+
+</div> 
+
+<!-- [CASE-4] RADIO BUTTON-->
+<div ng-switch-when="radio" style="margin-left: 23px; padding-bottom: 18px;" ng-class="{ 'Lastdiv' : $index + 1 == fields.length , 'FirstDiv' : $index ==0 }" ng-if="!isDependentField(field.id)" showErrors>
+<div>
+<label class="item item-input item-stacked-label" style="margin-left: -23px;font-weight: bold;"><p ng-show='{{field.required}}' class="mandatory-field">*</p><div class="input-label">{{ field.lable }}</div>
+</label></div>
+<ion-list class="list" >
+
+ <ion-radio name="{{field.id}}" ng-if="!isGridRecodsShow" ng-repeat="item in field.type.values"  ng-init="getExistOptionDerivedField(field.defaultValue,field.type.values);recordInfo[field.id]=field.defaultValue" ng-value="item.value" style="right: 13px;width: 99%; border: 1px solid gainsboro;" ng-model="recordInfo[field.id]"  ng-required='{{field.required}}' ng-change="getDropDownInfo(recordInfo[field.id],field.type.values)" ng-disabled="isReadonlyDependField(field.id)">{{ item.lable }}</ion-radio> 
+
+ <ion-radio name="{{field.id}}" ng-if="isGridRecodsShow" ng-repeat="item in field.type.values" style="right: 13px;width: 99%; border: 1px solid gainsboro;" ng-model="selectedFormRecordFields[field.id]" ng-value="item.value"  ng-change="getDropDownInfo(recordInfo[field.id],field.type.values)" ng-required='{{field.required}}' ng-disabled="{{condition}}" ng-init="getExistOptionDerivedField(selectedFormRecordFields[field.id],field.type.values)">{{ item.lable }}</ion-radio>  
+
+<div ng-show="fieldsform[field.id].$error.required" class="field-error-text">Field is required</div>
+</ion-list>
+</div>
+
+<!-- [CASE-5] SELECT-->
+<div class="list" ng-switch-when="select" ng-class="{ 'Lastdiv' : $index + 1 == fields.length , 'FirstDiv' : $index ==0 }" ng-if="!isDependentField(field.id)" showErrors>
+ <label class="item item-input item-select" style="margin-left: 6px;font-weight: bold;"><p ng-show='{{field.required}}' class="mandatory-field-dropdown">*</p>
+    <div class="input-label  custom-divider" style="margin-left: -9px;padding-bottom: 25px;">
+     {{ field.lable }}
+    </div>
+    
+    <select name="{{field.id}}" ng-init="getExistOptionDerivedField(field.defaultValue,field.type.values);recordInfo[field.id]=field.defaultValue" style="right: 24px;padding-bottom: 7px; padding-right: 2px;padding-top: 20px;"  id={{field.id}} ng-if="!isGridRecodsShow" ng-model="recordInfo[field.id]" ng-required='{{field.required}}' ng-change="getDropDownInfo(recordInfo[field.id],field.type.values)" ng-disabled="isReadonlyDependField(field.id)">
+	       <option ng-repeat="option in field.type.values" ng-required='{{field.required}}'>{{option.lable}}</option>
+  <!-- <input type="text" disabled> -->
+	</select>
+		
+	<select ng-init=" getExistOptionDerivedField(selectedFormRecordFields[field.id],field.type.values)" name="{{field.id}}"  ng-if="isGridRecodsShow" style="right: 24px;padding-bottom: 7px; padding-right: 2px;padding-top: 20px;" id={{field.id}} ng-model="selectedFormRecordFields[field.id]" ng-disabled="{{condition}}" ng-required='{{field.required}}' ng-change="getDropDownInfo(selectedFormRecordFields[field.id],field.type.values)">
+	<option ng-repeat="option in field.type.values">{{option.lable}}</option>
+	</select>
+ 
+ </label>
+  <div ng-show="fieldsform[field.id].$error.required && fieldsform[field.id].$dirty" class="field-error-text">Field is required</div> 
+</div>  
+
+<!-- [CASE-6] CAMERA-->
+
+<div ng-switch-when ="camera" ng-class="{ 'Lastdiv' : $index + 1 == fields.length , 'FirstDiv' : $index ==0 }" ng-hide="popover_hide" ng-if="!isDependentField(field.id)" showErrors>
+ <label class="item item-input item-stacked-label" ng-click= "openPopover($event,field.id,$index)" style="font-weight: bold;"><p ng-show='{{field.required}}' style="float:left;color:red;">*</p>
+ <div class="input-label">{{ field.lable }}</div>
+ <div ng-show="cameraShow" style="width:100%;" ng-click= "openPopover($event,field.id,$index)"><img src="img/cam.png"  class="custom-camera" /></div>
+ </label> 
+<div>
+</br> 
+
+<img name="{{field.id}}" style="width: 15% !important;" ng-init="recordInfo[field.id] =field.id" ng-if="!isGridRecodsShow" ng-src="{{imgeasSet[field.id]}}" ng-model="recordInfo[field.id]" id={{field.id}} ng-required='{{field.required}}'> 
+<!--  ng-click="openimagePopover(imgeasSet[$index])" -->
+
+<img name="{{field.id}}" style="width: 15% !important;" ng-if="isGridRecodsShow" ng-src="{{imgeasSet[field.id]?imgeasSet[field.id]:selectedFormRecordFields[field.id]}}" ng-model="recordInfo[field.id]" id={{field.id}} ng-disabled="{{condition}}" ng-required='{{field.required}}'>
+
+ </div>
+<div class="custom-divider2" style="padding-bottom: 20px;margin-left: 11px;margin-top: -7px;"></div>
+</div>
+
+<!-- [CASE-7] CALENDER-->
+  <div ng-switch-when="calender" ng-class="{ 'Lastdiv' : $index + 1 == fields.length, 'FirstDiv' : $index ==0}" ng-if="!isDependentField(field.id)">
+  <ion-item style="padding-top: 0px;">
+ <label class="item item-input item-stacked-label content-text" style="font-weight: bold;"><p ng-show='{{field.required}}' class="mandatory-field">*</p>
+    <div class="input-label">{{ field.lable }}</div>
+  
+  <span ng-if="field.minDate !=='' && field.maxDate !==''">
+    <input name="{{field.id}}" ng-if="!isGridRecodsShow" type="date" max='{{field.maxDate | date : "yyyy-MM-dd"}}' min='{{field.minDate | date : "yyyy-MM-dd"}}' ng-model='recordInfo[field.id]' placeholder ='{{field.placeHolder}}' ng-required='{{field.required}}' id='{{field.id}}' >  
+  </span>
+
+  <span ng-if="field.minDate =='' && field.maxDate ==''" >
+    <input name="{{field.id}}" ng-if="!isGridRecodsShow" type="date"  ng-model='recordInfo[field.id]' placeholder ='{{field.placeHolder}}' ng-required='{{field.required}}' id='{{field.id}}' >  
+  </span>
+   
+   <span ng-if="field.minDate !=='' && field.maxDate !==''">
+    <input name="{{field.id}}" ng-init="selectedFormRecordFields[field.id] = convertToDate(selectedFormRecordFields[field.id])" ng-if="isGridRecodsShow" type="date" max='{{field.maxDate | date : "yyyy-MM-dd"}}' min='{{field.minDate | date : "yyyy-MM-dd"}}' ng-model="selectedFormRecordFields[field.id]" placeholder ='{{field.placeHolder}}' ng-required='{{field.required}}' id='{{field.id}}' ng-readonly="{{condition}}">
+  </span>
+
+   <span ng-if="field.minDate =='' && field.maxDate ==''" >
+   <input name="{{field.id}}" ng-init="selectedFormRecordFields[field.id] = convertToDate(selectedFormRecordFields[field.id])" ng-if="isGridRecodsShow" type="date" ng-model="selectedFormRecordFields[field.id]" placeholder ='{{field.placeHolder}}' ng-required='{{field.required}}' id='{{field.id}}' ng-readonly="{{condition}}"> 
+  </span>
+  
+  </label> 
+
+    <div ng-show="fieldsform[field.id].$error.required && (fieldsform[field.id].$dirty)" class="field-error-text">Field is required</div>  
+
+  </ion-item>
+  
+</div> 
+
+<!-- [CASE-8] BARCODE-->
+<div ng-switch-when ="barcode" style="padding-top: 7px;padding-bottom: 10px;" ng-class="{ 'Lastdiv' : $index + 1 == fields.length , 'FirstDiv' : $index ==0 }" ng-disabled="{{condition}}" ng-if="!isDependentField(field.id)" showErrors>
+ <label class="item item-input item-stacked-label" style="font-weight: bold;padding-bottom: 0px; "><p ng-show='{{field.required}}' style="float:left;color:red;">*</p>{{ field.lable }} </label> 
+<div  ng-click="scanBarcode($index,field.id)"><img src="img/barcode.png" ng-show="barcodeShow" class="custom-barcode"/></div>
+<input name="{{field.id}}" type="text" ng-if="!isGridRecodsShow" ng-readonly=true ng-init="{{recordInfo[field.id]=Barcode[field.id]}}" ng-model="recordInfo[field.id]" id={{field.id}} class="custom-barcode-text"  ng-required='{{field.required}}'> 
+
+<input name="{{field.id}}" ng-if="isGridRecodsShow" type="text" ng-readonly=true ng-model='selectedFormRecordFields[field.id]' ng-required='{{field.required}}' id={{field.id}} class="custom-barcode-text" ng-readonly="{{condition}}"> 
+   <div ng-show="((fieldsform[field.id].$error.required)&& (fieldsform[field.id].$dirty))" class="field-error-text">Field is required</div> 
+
+</div>
+ 
+<!-- [CASE -9] Signature -->
+<div ng-switch-when="sign" ng-class="{ 'Lastdiv' : $index + 1 == fields.length, 'FirstDiv' : $index ==0}" ng-if="!isDependentField(field.id)">
+  <label class="item item-input item-stacked-label" style="font-weight: bold;"><p ng-show='{{field.required}}' class="mandatory-field">*</p><div class="input-label">{{ field.lable }}</div></label> 
+ <button class="button button-full " ng-click="openSignatureModal($event,$index,field.id);" id={{field.id}}  ng-disabled="{{condition}}" ng-required='{{field.required}}'>open signature pad</button>
+
+<img name="{{field.id}}" ng-init="recordInfo[field.id] =field.id" ng-if="!isGridRecodsShow" ng-src='{{sign[field.id]}}' ng-model="recordInfo[field.id]" style="margin-left:35%;" id={{field.id}} value="{{field.id}}" ng-required='{{field.required}}'/>
+
+ <img name="{{field.id}}" ng-if="isGridRecodsShow" ng-src="{{sign[field.id]?sign[field.id]:selectedFormRecordFields[field.id]}}" ng-required='{{field.required}}' ng-model="recordInfo[field.id]" style="margin-left:35%;" id={{field.id}} value="{{field.id}}"/>
+ 
+ </div>   
+ <!-- [CASE -10 ] RATING  -->
+
+  <div ng-switch-when="rating" ng-class="{ 'Lastdiv' : $index + 1 == fields.length , 'FirstDiv' : $index ==0 }" ng-if="!isDependentField(field.id)">
+  <ion-item>
+  <label class="item item-input item-stacked-label content-text" style="font-weight: bold;"><p ng-show='{{field.required}}' class="mandatory-field">*</p>
+		<div class="input-label">{{ field.lable }}</div>
+ <table name="{{field.id}}" style="width:100%" ng-if="!isGridRecodsShow" ng-required='{{field.required}}'><tr style="width:100%"><td class="range-text">{{field.minLable}}</td><td style="width:90%;"><ion-range-slider  min=field.min max=field.max grid=true id={{field.id}} onchange="recordInfo.value=value" ng-model="recordInfo.value"></ion-range-slider></td><td class="range-text">{{field.maxLable}}</td></tr></table> 
+    <output id="recordInfo" ng-show="false"></output> 
+	
+  <table name="{{field.id}}" style="width:100%"  ng-if="isGridRecodsShow" ng-required='{{field.required}}'><tr style="width:100%"><td class="range-text">{{field.minLable}}</td><td style="width:90%;"><ion-range-slider  type="single" min=field.min max=field.max    from=selectedFormRecordFields[field.id] onchange="recordInfo.value=value" ng-model="recordInfo.value" grid=true id={{field.id}} ng-readonly="{{condition}}"></ion-range-slider></td><td class="range-text">{{field.maxLable}}</td>
+	</tr></table>  
+	<output id="recordInfo" ng-show="false"></output> 
+  </ion-item>
+  
+   <div ng-show="fieldsform[field.id].$error.required && fieldsform[field.id].$dirty" class="field-error-text">Field is required</div> 
+ </div>   
+  
+ <!-- [CASE -11 ]  Map  -->
+
+  <div ng-switch-when="map"  ng-class="{ 'Lastdiv' : $index + 1 == fields.length , 'FirstDiv' : $index ==0 }" ng-disabled="true" ng-if="!isDependentField(field.id)">
+   <label class="item item-input item-stacked-label" style="font-weight: bold;padding-bottom: 0px; "><p ng-show='{{field.required}}' style="float:left;color:red;">*</p>{{ field.lable }} </label> 
+   <img src="img/Location.png" class="custom-location" ng-click="getLocation($index)" />
+
+   <input name="{{field.id}}" type="text" ng-init="getLocation($index,field.id)" ng-if="!isGridRecodsShow"  ng-model='selectedFormRecordFields[field.id]' id={{field.id}} class="custom-barcode-text" ng-required='{{field.required}}' ng-disabled="true">
+
+   <input name="{{field.id}}" ng-if="isGridRecodsShow" type="text"   ng-model='selectedFormRecordFields[field.id]' ng-required='{{field.required}}' id={{field.id}} class="custom-barcode-text" ng-disabled="true">  
+  </div>
+<!-- timestamp -->
+<div ng-switch-when="timestamp" ng-class="{ 'Lastdiv' : $index + 1 == fields.length , 'FirstDiv' : $index ==0 }" ng-if="!isDependentField(field.id)"  showErrors>
+  <ion-item>
+ <label class="item item-input item-stacked-label content-text" style="font-weight: bold;"><p ng-show='{{field.required}}' class="mandatory-field">*</p>
+  <div class="input-label">{{ field.lable }}</div>
+  
+    <input type="text" ng-if="!isGridRecodsShow" ng-init="recordInfo[field.id]=field.defaultValue" placeholder ='{{field.placeHolder}}' name="{{field.id}}" ng-required='{{field.required}}' id={{field.id}} ng-model="recordInfo[field.id]" ng-readonly="{{field.readOnly}}" ng-disabled="isReadonlyDependField(field.id)">
+
+     <input type="text" ng-if="isGridRecodsShow" name="{{field.id}}"  ng-required='{{field.required}}' id={{field.id}} ng-model="selectedFormRecordFields[field.id]" ng-readonly="true">
+
+    </label>
+    </ion-item>
+  </div>  
+   
+  
+  </div>
+<div ng-switch-when="group" ng-if="!isDependentField(field.id)">
+
+				<div class="card-header ch-alt">
+					<h2>{{field.lable}}</h2>
+				</div>
+				<div class="card-body card-padding">
+					<div ng-repeat="field in field.type.fields" data-ng-include="'templates/groupWidgetsPreview.html'" ng-if="!prepopDataShow">
+                    </div>
+				</div>
+</div>
+  <div ng-switch-when="section" ng-if="!isDependentField(field.id)">
+				<div>
+					<h2>{{field.lable}}</h2>
+				</div>
+					<div ng-repeat="field in field.type.fields">
+						<div ng-switch on="field.type">
+							<div ng-switch-when='field'>
+								<div data-ng-include="'templates/sectionWidgetsPreview.html'" ng-if="!prepopDataShow"></div>
+							</div>
+
+							<div ng-switch-when='group'>
+								<div>
+									<div>
+								        <h2>{{field.data.lable}}</h2>
+								    </div>
+								    <div>
+								    	<div ng-init="placeOfWidgets = 'group'" ng-repeat="field in field.data.type.fields">
+								    		<div data-ng-include="'templates/groupWidgetsPreview.html'" ng-if="!prepopDataShow"></div>
+								    	</div>
+								    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+	</div>
+</div>

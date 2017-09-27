@@ -1,0 +1,39 @@
+<ion-header-bar class="bar-custom formdetails-header-bar bar bar-header disable-user-behavior has-tabs-top" ng-init="methodCheck()">
+    <p style="padding-left: 5px;margin-top: 10px;position: absolute;float: left;color: #fff;" ng-if="status" ng-hide="sync_header_option" ng-click="clearSelection();"><small>Clear</small></p>
+ <!-- <h1 class="title tabs-title-lable title-left" style=" vertical-align: middle;margin: auto;"> Jobs</h1> -->
+    <p style="padding-right: 5px;margin-top: 10px;float: right;position: absolute;color: #fff;right: 0;" ng-click="checkRecord()" ng-show="sync_header_option"><small>Sync</small></p>
+     <p style="padding-right: 5px;margin-top: 10px;float: right;position: absolute;color: #fff;right: 0;" ng-click="syncAllTasksOnline(selection)" ng-if="status" ng-hide="sync_header_option"><small>Done</small></p>
+</ion-header-bar>
+
+<ion-view  style="top: -50px;" hide-nav-bar="true">
+	<ion-content direction="y" scrollbar-y="false">
+		<ion-refresher pulling-icon="ion-arrow-down-b" on-refresh="refreshItems()"></ion-refresher>
+
+		<!-- ng-class="item.notifyStatus ? 'formscontainer' : 'formscontainer1 custom-margin'" -->
+			<ion-list class="custom-content">	
+				<div class="item item-divider" ng-click="checkAll();" ng-hide="sync_header_option" ng-if="status">SelectAll
+				</div>
+	
+			<ion-item ng-repeat="item in tasks" class="shadow" ng-click="getAssignedForms(item);" ng-class="item.notifyStatus ? 'formscontainer' : 'formscontainer1 custom-margin'">
+			  <input type="checkbox" ng-if="selectCheckBox" class="custom-selectBox"
+				ng-checked="selection.indexOf(item.taskId)> -1" ng-click="toggleSelection(item.taskId)" ng-model="selection.indexOf(item.taskId) > -1"/>
+		
+			  <img src="img/Form.png" class="container-image" ng-show="!item.status"/>
+				<img src="img/Downloaded_Form.png" class="container-image" ng-show="item.status"/>
+				<p class="form-lable">{{item.TaskName}}</p>
+                <ion-option-button  class="custom-button-map" ng-click="navigateToMap(item)" ng-show="mapOption">
+					<b class="slide-text-info">Map</b>
+				</ion-option-button> 
+				<ion-option-button class="custom-button-info" ng-click="taskDetails(item)">
+					<b class="slide-text-info">Info</b>
+			    </ion-option-button>
+			    <ion-option-button class="custom-button-more" ng-click="moreOptions(item)" ng-show="moreOption">
+					<b class="slide-text-info">More</b>
+			    </ion-option-button>
+			</ion-item>
+		</ion-list>
+		<div ng-if="tasks !== undefined && !tasks.length" class="no-results">
+			<p class="custom-noforms" style="margin-top: 56px;">No Jobs Available</p>
+		</div>
+	</ion-content>
+</ion-view>

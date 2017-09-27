@@ -1,0 +1,23 @@
+
+<ion-view  style="background-color:#eee;" hide-nav-bar="true" >
+	 <ion-content direction="y" scrollbar-y="false" class="custom-subtabs">
+		<ion-refresher pulling-icon="ion-arrow-down-b" on-refresh="refreshItems()">
+		</ion-refresher>
+		<ion-list class="custom-content-reassign">
+
+			<ion-item ng-repeat="item in reassignItems" ng-click="getFormDetails(item)" class="formscontainer shadow">
+				  <img src="img/Form.png" class="container-image" />
+					<p class="form-lable">{{item.FormName}}</p>
+
+					<ion-option-button class="custom-button-history" ng-click="historyOfReassignRecords(item)">
+					 <b class="slide-text-history">History</b>
+					</ion-option-button>  
+
+					</ion-item>
+		</ion-list>
+		<div ng-if="reassignItems !== undefined && !reassignItems.length" class="no-results">
+			 <p class="custom-nohistory" style="margin-top: 56px;">No Downloaded Forms</p>
+		</div>
+		
+	</ion-content> 
+</ion-view> 

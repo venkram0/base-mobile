@@ -1,0 +1,36 @@
+<ion-header-bar class="bar-custom formdetails-header-bar" ng-init="getNotifications();">
+   <h1 class="title tabs-title-lable" style="text-align: center;"> Notifications</h1>
+</ion-header-bar>
+	
+<ion-view  style="top: -50px;" hide-nav-bar="true">
+	<ion-content direction="y" scrollbar-y="false" style="position:absolute;">
+		<ion-refresher pulling-icon="ion-arrow-down-b" on-refresh="refreshNotification()">
+			</ion-refresher>
+		<div class="list" ng-if="status">
+			<a class="item" href="" style="border-bottom: 1px solid #ddd;" ng-repeat="item in items" ng-show="item.actionType=='reassign'" ng-click="navigateToRecord(item)" ng-class="item.status ? 'self' : 'self1'">
+			<!-- ng-class="item.status ? 'self' : 'self1'" -->
+			    <p>Admin <b>{{item.adminName}}</b> has re-assigned address <b>{{item.displayValues}}</b> for <b>{{item.taskName}}</b> Job</p>
+
+			    <span class="item-note" am-time-ago="item.time">
+			      <!-- <i class="icon ion-clock"></i>&nbsp;4hrs ago -->
+			    </span>
+			</a>
+			<!-- <a class="item self" href="" style="border-bottom: 1px solid #ddd;" ng-repeat="item in items" ng-click="navigateToTask(item)">
+			    <p>Admin <b>Roja</b> has assigned <b>{{item.taskName}}</b> Job</p>
+			    <span class="item-note">
+			      <i class="icon ion-clock"></i>&nbsp;4hrs ago
+			    </span>
+			</a> -->
+			
+		</div>
+		<div ng-if="(status) && (items !== undefined && !items.length)" class="no-results" style="padding-top: 155px;">
+		 <p class="custom-nohistory">No Notifications
+		</p>
+		</div>
+<div ng-if="!status" style="margin-top: 50%;">
+  <center>
+  <img src="img/Offline.png" style="width: 150px;height: 150px;">
+  </center>
+</div>
+	</ion-content>
+</ion-view>

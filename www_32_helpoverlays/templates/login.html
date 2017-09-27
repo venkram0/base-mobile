@@ -1,0 +1,47 @@
+<ion-header-bar class="bar-custom formdetails-header-bar">
+    <h1 class="title tabs-title-lable" style="text-align: center;"> Carding App</h1>
+</ion-header-bar>
+<ion-view>
+<ion-content class="my-background">
+    <div class="hero no-header flat">
+        <div class="content">
+            <div class="app-icon"></div> 
+            <h1></h1>
+        </div>
+    </div>
+    <form ng-submit="login(user)" method="" style="margin-top: -30px;" >
+    <div class="list list-inset c-input">
+      <label class="item item-input">
+        <span class="step size-32 c-step">
+            <img src="img/Loginuser.png" class="input_icon"> 
+            <span class="side_dash"></span>
+        </span>
+        <input class="login_input" type="text" placeholder="Username" data-ng-model="user.username" style="margin-left: 25px; color:#595d65;">
+      </label>
+    </div>
+
+    <div class="list list-inset c-input">
+      <label class="item item-input">
+        <span class="step size-32 c-step">
+            <img src="img/LoginPassword.png" class="input_icon"> 
+            <span class="side_dash"></span>
+        </span>
+        <input class="login_input" type="password" placeholder="password" data-ng-model="user.password" style="margin-left: 25px;color:#595d65;">
+      </label>
+
+      <!-- <div id="input_container">
+        <input type="text" id="input" value>
+        <img src="https://cdn4.iconfinder.com/data/icons/36-slim-icons/87/calender.png" id="input_img">
+      </div> -->
+
+    </div>
+
+    <div class="loginbt-padding">
+     <!-- <input type="submit" value="SIGN IN"/> -->
+        <ion-checkbox style="border:none;"><span style="float: left;color: #595d65;">Remember me</span></ion-checkbox>
+        <button class="button button-full button-dark" type="submit">SIGN IN</button>
+     <!-- <h2 ng-click="forgotPassword()" class="frgtpwd"> Forgot Password ?</h2> -->
+    </div>
+    </form>
+</ion-content>
+</ion-view>

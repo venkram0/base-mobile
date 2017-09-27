@@ -1,0 +1,32 @@
+
+	<ion-header-bar class="bar-positive formdetails-header-bar" ng-init="getOnlineItems()">
+	<div class="custom_header_back" ng-click="back();"><img src="img/back.png" class="header-back" ></div><h3 class="header_formname">{{formname}}</h3>
+	
+	  <!-- <button class="button button-icon icon ion-ios-search-strong custom-search" ng-click="showFilterBar()" style="box-shadow: none;">
+    </button>  -->
+	</ion-header-bar>
+	
+<ion-view  style="background-color:#eee;" hide-nav-bar="true">
+  
+				<ion-content direction="y" scrollbar-y="false">
+				<ion-refresher pulling-icon="ion-arrow-down-b" on-refresh="refreshItems()">
+				</ion-refresher>
+				<ion-list class="custom-content">
+				
+				<ion-item ng-repeat="item in items" class="formscontainer shadow"  ng-click="viewRecord(item)">
+				<img src="img/Form.png" class="container-image" />
+				<p class="form-lable">{{item.recordId}}</p>
+				
+				<input type="checkbox" ng-if="selectCheckBox" class="custom-selectBox"
+				ng-checked="selection.indexOf(item.recordId) > -1" ng-click="toggleSelection(item.recordId)" />
+				<input type="checkbox" ng-if="selectAllCheckBox" ng-model="selectedAll" class="custom-selectBox"/>   
+								
+				</ion-item> 
+				 <!--   <div><img src="img/Fab.png" class="add-record" ng-click="getFormDetails(item)"> </div> -->
+				</ion-list>
+					<div ng-if="items !== undefined && !items.length" class="no-results">
+				  <p class="custom-nohistory">No Submitted Records</p>
+				</div>
+							
+					</ion-content>
+</ion-view> 

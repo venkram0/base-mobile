@@ -1,0 +1,53 @@
+ <ion-header-bar class="bar-positive formdetails-header-bar" ng-init="getReassignRecords()">
+	<h1 class="title tabs-title-lable reassign-header" ng-show="reassign_action_header">Re-assign</h1>
+	
+	<!-- <button class="button button-icon icon ion-ios-search-strong custom-search-reassign" ng-click="showFilterBar()" style="box-shadow: none;top:0px" ng-show="reassign_action_header">
+	</button> -->
+<!-- 	<img src="img/notifications.png" class="custom-notifications-reassign" ng-show="reassign_action_header" ng-click="notifications();"> 
+ -->	<!-- <img src="img/ellipse.png" class="selectOptions-reassign" ng-click="openPopover();" ng-show="reassign_action_header">
+
+	<img src="img/cancel.png" class="header-cancel-reassign" ng-hide="reassign_action_header" ng-click="clearSelection();" >
+	<img src="img/dwnld.png" class="header_delete-reassign" ng-click="downloadAllForms(selection,item);" ng-hide="reassign_action_header"> 
+	<img src="img/Submit.png" class="heder_sync-reassign" ng-click="submitAllOfflineForms(selection,item);" ng-hide="reassign_action_header"> -->
+	</ion-header-bar>
+
+	<ion-view  style="background-color:#eee;" hide-nav-bar="true">
+
+		<ion-content direction="y" scrollbar-y="false" style="top: 46px;">		
+		<ion-refresher pulling-icon="ion-arrow-down-b" on-refresh="refreshItems()">
+		</ion-refresher>
+			<ion-list class="custom-content">
+				<ion-item ng-repeat="item in reassignedRecords" class="formscontainer shadow" ng-click="getReassignRecordData(item,arrVals.indexOf(item.recordId))">
+				
+				<input type="checkbox" ng-if="selectCheckBox" class="custom-selectBox"
+				ng-checked="selection.indexOf(item.recordId)> -1" ng-click="toggleSelection(item.recordId)" />
+				<input type="checkbox" ng-if="selectAllCheckBox" ng-model="selectedAll" class="custom-selectBox"/> 
+
+					<img src="img/Form_record.png" class="container-image" ng-show="arrVals.indexOf(item.recordId)==-1"/>
+					
+					<img src="img/forms_downloaded.png" class="container-image" ng-show="arrVals.indexOf(item.recordId)!=-1"/>
+
+					<!-- <img src="img/Task_record.png" class="container-image" ng-hide="arrVals.indexOf(item.recordId)==-1"/>
+					<img src="img/Tasks_downloaded.png" class="container-image" ng-show="arrVals.indexOf(item.recordId)!=-1"/> -->
+					<!-- {{recId}} -->
+
+					<p class="form-lable">{{item.dpValues}}</p>
+					
+					<!-- <ion-option-button class="custom-button-download" ng-click="downloadReassignedRecords(item)" ng-hide="hide_download">
+						<b class="slide-text-download">Download</b>
+					</ion-option-button> --> 
+					<ion-option-button class="custom-button-info" ng-click="ReassignedFormInfo(item)">
+						<b class="slide-text-info">Info</b>
+					</ion-option-button>  
+
+				</ion-item> 
+			</ion-list>
+             <div ng-if="reassignedRecords !== undefined && !reassignedRecords.length" class="no-results"style="padding-top: 155px;">
+					  <p class="custom-nohistory">No records available !<br>
+              </div>
+
+			<!-- <div ng-if="reassignedRecords !== undefined && !reassignedRecords.length" class="no-results">
+				<p class="custom-noforms">No Formsz Available</p>
+			</div> -->
+		</ion-content>
+	</ion-view>
